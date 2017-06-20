@@ -1,4 +1,4 @@
-# Data Preprocessing:
+# Data Preprocessing
 
 1. Cut unnecessary zero edge. For simplicity, let the cutted data still have the same size for each subject. You need to set how many zero margins to keep. It is suggested to set it to half of your training patch size.
 
@@ -8,7 +8,7 @@
 
 3. Do data augmentations: flip on 3 dims and rotation on 3 planes & 3 angles. In total, get 3+9=12 extra datasets.
 
-## How to use:
+# How to use
 
 1. Properly set arguments and run
 ```
