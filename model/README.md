@@ -83,13 +83,11 @@ tensorboard --logdir=logdir/
 Fill the overlap_stepsize, test_step and change batch to 1 in configure. Then run
 ```
 python main.py --action='test'
-
 ```
 
 If you want to make predictions, run
 ```
 python main.py --action='predict'
-
 ```
 
 #### Prediction evaluation and visualization
