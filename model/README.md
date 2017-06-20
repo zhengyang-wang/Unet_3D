@@ -1,4 +1,5 @@
 # 3D Unet with VoxelDCL and DTN
+
 ## Configure the network
 All network hyperparameters are configured in main.py.
 
@@ -6,27 +7,27 @@ All network hyperparameters are configured in main.py.
 
 max_step: how many iterations or steps to train
 
-test_interval: how many steps to perform a mini test or validation
-
 save_interval: how many steps to save the model
 
 summary_interval: how many steps to save the summary
+
+learning_rate: learning rate for SGD training
 
 #### Data
 
 data_dir: data directory
 
-train_data: h5 file for training
+aug_flip: whether to use flip-augmented data to generate 3 extra datasets
 
-valid_data: h5 file for validation
+aug_rotate: whether to use rotation-augmented data to generate 9 extra datasets
 
-test_data: h5 file for testing
+validation_id: which subject to use as validation data (1-10)
 
-batch: batch size
+overlap_stepsize: overlap stepsize when testing or prediction
 
-channel: input image channel number
+patch_size: training patch size
 
-height, width: height and width of input image
+batch: batch size (>1 if training, =1 if testing)
 
 #### Debug
 
@@ -34,7 +35,7 @@ logdir: where to store log
 
 modeldir: where to store saved models
 
-sampledir: where to store predicted samples, please add a / at the end for convinience
+savedir: where to store predicted results
 
 model_name: the name prefix of saved models
 
@@ -52,7 +53,51 @@ class_num: how many classes. Usually number of classes plus one for background
 
 start_channel_num: the number of channel for the first conv layer
 
+#### Dense Transformer Networks
 
-1. batch to 1
-2. overlap_stepsize to an integer between 1-32
-3. test_step
+add_dtn: add DTN or not
+
+dtn_location: where to add the DTN
+
+control_points_ratio: the DTN input size / control_points
+
+
+## Training, Testing and Evaluation
+
+#### Start training
+
+After configure the network, we can start to train. Run
+```
+python main.py
+```
+
+#### Training process visualization
+
+We employ tensorboard to visualize the training process.
+```
+tensorboard --logdir=logdir/
+```
+
+#### Testing and prediction
+
+Fill the overlap_stepsize, test_step and change batch to 1 in configure. Then run
+```
+python main.py --action='test'
+
+```
+
+If you want to make predictions, run
+```
+python main.py --action='predict'
+
+```
+
+#### Prediction evaluation and visualization
+
+You can use eval/eval.py to evaluate the results through Dice Ratio and Modified Hausdorff Distance.
+
+To visualize the results, use eval/show_results.py.
+
+## Use VoxelDCL or DTN
+
+You can copy the utils/ to your own project to use VoxelDCL or DTN. Use this project as an example.
