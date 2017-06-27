@@ -19,7 +19,7 @@ def configure():
     flags.DEFINE_integer('summary_interval', 100, '# of step to save the summary')
     flags.DEFINE_float('learning_rate', 1e-3, 'learning rate')
     # data
-    flags.DEFINE_string('data_dir', '../h5_data/', 'Name of data file(s)')
+    flags.DEFINE_string('data_dir', '../h5_data_SM/', 'Name of data file(s)')
     flags.DEFINE_boolean('aug_flip', False, 'Training data augmentation: flip. Extra 3 datasets.')
     flags.DEFINE_boolean('aug_rotate', False, 'Training data augmentation: rotate. Extra 9 datasets.')
     flags.DEFINE_integer('validation_id', 10, '1-10, which subject is used for validation')

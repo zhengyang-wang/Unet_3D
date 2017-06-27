@@ -1,6 +1,6 @@
 # Data Preprocessing
 
-1. Cut unnecessary zero edge. For simplicity, let the cutted data still have the same size for each subject. You need to set how many zero margins to keep. It is suggested to set it to half of your training patch size.
+1. Cut unnecessary zero edge. For simplicity, let the cutted data still have the same size for each subject. You need to set how many zero margins to keep.
 
 2. Calculate means for mean-substraction based on cutted data.
 

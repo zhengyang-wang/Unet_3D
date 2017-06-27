@@ -81,7 +81,7 @@ class H53DDataLoader(object):
         if (self.t_h-self.h) % overlap_stepsize != 0:
             self.hrange.append(self.t_h-self.h)
         if (self.t_w-self.w) % overlap_stepsize != 0:
-           self. wrange.append(self.t_w-self.w)
+            self.wrange.append(self.t_w-self.w)
         for d in self.drange:
             for h in self.hrange:
                 for w in self.wrange:
