@@ -4,17 +4,16 @@ import os
 # import matplotlib.pyplot as plt
 import h5py
 
-# copy from results of calculate_mean.py
-MEAN = np.array((57.9034515187, 69.5360292781), dtype=np.float32) # 31.6906890728, 38.0572250084
-SIZE = (0, 143, 9, 191, 69, 215) # (0, 143, 0, 195, 0, 255)
+MEAN = np.array((100.913811861, 121.187003401), dtype=np.float32) # 31.6906890728, 38.0572250084
+STD = np.array((150.078421236, 173.828472883), dtype=np.float32) # 96.2650255072, 112.484409158
+SIZE = (9, 136, 25, 175, 85, 199) # (0, 143, 0, 195, 0, 255)
 
-# arguments
-SUBSTRACT_MEAN = False
-AUGMENT = True
+SUBSTRACT_MEAN = True
+AUGMENT = False
 NORMALIZE = True
 
 data_path = '../data'
-target_path = '../h5_data_AMN'
+target_path = '../h5_data_SN'
 '''    
 h5_data_[S][A][M][N]
     S: mean substraction
@@ -164,7 +163,7 @@ def build_h5_dataset(data_path, target_path):
             inputs -= MEAN
 
         if NORMALIZE:
-            inputs /= 1000.
+            inputs /= STD
 
         dataset['X'][i] = inputs
         dataset['Y'][i] = labels

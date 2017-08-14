@@ -6,10 +6,6 @@ import nibabel as nib
 import numpy as np
 import os
 
-# arguments
-margin = 16 # training_patch_size / 2
-raw_data_dir = '../data'
-
 def cut_edge(data, keep_margin):
     '''
     function that cuts zero edge
@@ -62,7 +58,7 @@ def get_cut_size(data_path):
         f = os.path.join(data_path, subject_name+'T1.hdr')
         img = nib.load(f)
         inputs_tmp = img.get_data()
-        D_s, D_e, H_s, H_e, W_s, W_e = cut_edge(inputs_tmp, margin)
+        D_s, D_e, H_s, H_e, W_s, W_e = cut_edge(inputs_tmp, 0) # set how many zero margins to keep
         list_D_s.append(D_s)
         list_D_e.append(D_e)
         list_H_s.append(H_s)
@@ -117,5 +113,44 @@ def get_mean(data_path):
     print("T1 cut mean: ", np.mean(cut_mean1_per_sub))
     print("T2 cut mean: ", np.mean(cut_mean2_per_sub))
 
+def get_mean_and_std(data_path): # add std calculation. Slow!
+    data1 = []
+    data2 = []
+    cut_data1 = []
+    cut_data2 = []
+
+    D_s, D_e, H_s, H_e, W_s, W_e = get_cut_size(data_path)
+    cut_size = (D_e-D_s+1) * (H_e-H_s+1) * (W_e-W_s+1)
+    # print(cut_size)
+
+    for i in range(1, 10+1):
+        subject_name = 'subject-%d-' % i
+        f_T1 = os.path.join(data_path, subject_name+'T1.hdr')
+        img_T1 = nib.load(f_T1)
+        f_T2 = os.path.join(data_path, subject_name+'T2.hdr')
+        img_T2 = nib.load(f_T2)
+
+        inputs_tmp_T1 = img_T1.get_data()
+        inputs_tmp_T2 = img_T2.get_data()
+
+        D, H, W, C = inputs_tmp_T1.shape
+        original_size = D * H * W
+
+        data1.append(inputs_tmp_T1)
+        data2.append(inputs_tmp_T2)
+
+        cut_data1.append(inputs_tmp_T1[D_s : D_e+1, H_s : H_e+1, W_s : W_e+1])
+        cut_data2.append(inputs_tmp_T2[D_s : D_e+1, H_s : H_e+1, W_s : W_e+1])
+
+    print("T1 mean: ", np.mean(data1))
+    print("T2 mean: ", np.mean(data2))
+    print("T1 std: ", np.std(data1))
+    print("T2 std: ", np.std(data2))
+    print("T1 cut mean: ", np.mean(cut_data1))
+    print("T2 cut mean: ", np.mean(cut_data2))
+    print("T1 cut std: ", np.std(cut_data1))
+    print("T2 cut std: ", np.std(cut_data2))
+
 if __name__ == '__main__':
-    get_mean(raw_data_dir)
+    # get_mean('../data')
+    get_mean_and_std('../data')
