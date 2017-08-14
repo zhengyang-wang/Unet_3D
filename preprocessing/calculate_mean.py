@@ -6,6 +6,10 @@ import nibabel as nib
 import numpy as np
 import os
 
+# arguments
+margin = 0
+raw_data_dir = '../data'
+
 def cut_edge(data, keep_margin):
     '''
     function that cuts zero edge
@@ -58,7 +62,7 @@ def get_cut_size(data_path):
         f = os.path.join(data_path, subject_name+'T1.hdr')
         img = nib.load(f)
         inputs_tmp = img.get_data()
-        D_s, D_e, H_s, H_e, W_s, W_e = cut_edge(inputs_tmp, 0) # set how many zero margins to keep
+        D_s, D_e, H_s, H_e, W_s, W_e = cut_edge(inputs_tmp, margin) # set how many zero margins to keep
         list_D_s.append(D_s)
         list_D_e.append(D_e)
         list_H_s.append(H_s)
@@ -152,5 +156,5 @@ def get_mean_and_std(data_path): # add std calculation. Slow!
     print("T2 cut std: ", np.std(cut_data2))
 
 if __name__ == '__main__':
-    # get_mean('../data')
-    get_mean_and_std('../data')
+    # get_mean(raw_data_dir)
+    get_mean_and_std(raw_data_dir)
