@@ -8,7 +8,7 @@ from utils.Dense_Transformer_Networks_3D import *
 
 
 """
-This module build a standard U-NET for semantic segmentation.
+This module builds a standard U-NET for semantic segmentation.
 If want VAE using pixelDCL, please visit this code:
 https://github.com/HongyangGao/UVAE
 """
@@ -71,13 +71,8 @@ class Unet_3D(object):
         self.cal_loss()
 
     def cal_loss(self):
-        expand_annotations = tf.expand_dims(
-            self.annotations, -1, name='annotations/expand_dims')
-        one_hot_annotations = tf.squeeze(
-            expand_annotations, axis=[self.channel_axis],
-            name='annotations/squeeze')
         one_hot_annotations = tf.one_hot(
-            one_hot_annotations, depth=self.conf.class_num,
+            self.annotations, depth=self.conf.class_num,
             axis=self.channel_axis, name='annotations/one_hot')
         losses = tf.losses.softmax_cross_entropy(
             one_hot_annotations, self.predictions, scope='loss/losses')
@@ -149,7 +144,7 @@ class Unet_3D(object):
         out_num = inputs.shape[self.channel_axis].value
         conv1 = self.deconv_func()(
             inputs, out_num, self.conv_size, name+'/conv1',
-            self.conf.data_type)
+            self.conf.data_type, action=self.conf.action)
         conv1 = tf.concat(
             [conv1, down_inputs], self.channel_axis, name=name+'/concat')
         conv2 = self.conv_func()(

@@ -53,6 +53,12 @@ class_num: how many classes. Usually number of classes plus one for background
 
 start_channel_num: the number of channel for the first conv layer
 
+conv_name: choose traditional convolution or ipixel convolution to do downsampling
+
+deconv_name: choose traditional deconvolution, pixel deconvolution or ipixel deconvolution to do upsampling
+
+action: if pixel_dcl or ipixel_dcl is used, choose the way how feature maps are combined inside the layer
+
 #### Dense Transformer Networks
 
 add_dtn: add DTN or not

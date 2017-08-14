@@ -5,7 +5,7 @@ from HausdorffDistance import ModHausdorffDist
 
 results_filename = '../result/results215000_sub10_overlap4.npy'
 print(results_filename)
-data_filename = '/tempspace/zwang6/infant_brain/h5_data_AMN/data.h5'
+data_filename = '/tempspace/zwang6/infant_brain/h5_data_SA/data.h5'
 valid_sub_id = 10
 
 def one_hot(inputs):

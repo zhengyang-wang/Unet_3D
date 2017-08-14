@@ -15,11 +15,11 @@ def configure():
     flags = tf.app.flags
     flags.DEFINE_integer('max_step', 250000, '# of step for training')
     # flags.DEFINE_integer('test_interval', 100000000, '# of interval to test a model')
-    flags.DEFINE_integer('save_interval', 1000, '# of interval to save a model')
-    flags.DEFINE_integer('summary_interval', 100, '# of step to save the summary')
+    flags.DEFINE_integer('save_interval', 1000, '# of interval to save model')
+    flags.DEFINE_integer('summary_interval', 100, '# of step to save summary')
     flags.DEFINE_float('learning_rate', 1e-3, 'learning rate')
     # data
-    flags.DEFINE_string('data_dir', '../h5_data_SM/', 'Name of data file(s)')
+    flags.DEFINE_string('data_dir', '../h5_data_SA/', 'Name of data file(s)')
     flags.DEFINE_boolean('aug_flip', False, 'Training data augmentation: flip. Extra 3 datasets.')
     flags.DEFINE_boolean('aug_rotate', False, 'Training data augmentation: rotate. Extra 9 datasets.')
     flags.DEFINE_integer('validation_id', 10, '1-10, which subject is used for validation')
@@ -50,7 +50,10 @@ def configure():
     flags.DEFINE_string(
         'deconv_name', 'deconv',
         'Use which deconv op in decoder: deconv, pixel_dcl, ipixel_dcl')
-    # Dense Transformer Networks
+    flags.DEFINE_string(
+        'action', 'concat',
+        'Use how to combine feature maps in pixel_dcl and ipixel_dcl: concat or add')
+	# Dense Transformer Networks
     flags.DEFINE_boolean('add_dtn', False, 'add Dense Transformer Networks or not')
     flags.DEFINE_integer('dtn_location', 2, 'The Dense Transformer Networks location')
     flags.DEFINE_string('control_points_ratio', 2,
