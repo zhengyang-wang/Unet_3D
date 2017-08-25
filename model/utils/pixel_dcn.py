@@ -53,7 +53,7 @@ def ipixel_dcl3d(inputs, out_num, kernel_size, scope, action='concat', activatio
     """
     axis, c_axis = (1, 2, 3), 4  # only support format 'NDHWC'
     conv0 = conv3d(inputs, out_num, kernel_size, scope+'/conv0')
-    combine1 = combine([inputs, conv0], action, c_axis, scope+'combine1')
+    combine1 = combine([inputs, conv0], action, c_axis, scope+'/combine1')
     conv1 = conv3d(combine1, out_num, kernel_size, scope+'/conv1')
     combine2 = combine([combine1, conv1], action, c_axis, scope+'/combine2')
     conv2 = conv3d(combine2, 3*out_num, kernel_size, scope+'/conv2')
@@ -94,7 +94,7 @@ def pixel_dcl3d(inputs, out_num, kernel_size, scope, action='concat', activation
     conv2_list = tf.split(conv2, 3, c_axis, name=scope+'/split1')
     combine2 = combine([conv0]+conv2_list, action, c_axis, scope=scope+'/combine2')
     conv3 = conv3d(combine2, 3*out_num, kernel_size, scope+'/conv3')
-    conv3_list = tf.split(conv3, 3, c_axis, name=scope+'/split1')
+    conv3_list = tf.split(conv3, 3, c_axis, name=scope+'/split2')
     dilated_conv0 = dilate_tensor(
         conv0, axis, (0, 0, 0), scope+'/dialte_conv0')
     dilated_conv1 = dilate_tensor(
@@ -112,11 +112,11 @@ def pixel_dcl3d(inputs, out_num, kernel_size, scope, action='concat', activation
     return outputs
 
 
-def combine(tensors, action, axis, scope):
+def combine(tensors, action, axis, name):
     if action == 'concat':
-        return tf.concat(tensors, axis, name=scope)
+        return tf.concat(tensors, axis, name=name)
     else:
-        return tf.add_n(tensors, name=scope)
+        return tf.add_n(tensors, name=name)
 
 
 def ipixel_dcl(inputs, out_num, kernel_size, scope, activation_fn=tf.nn.relu,
