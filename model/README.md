@@ -91,7 +91,7 @@ Fill the overlap_stepsize, test_step and change batch to 1 in configure. Then ru
 python main.py --option='test'
 ```
 
-If you want to make predictions, run
+If you want to make predictions, do the same as testing and run
 ```
 python main.py --option='predict'
 ```
