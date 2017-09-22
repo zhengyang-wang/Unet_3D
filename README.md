@@ -1,8 +1,12 @@
-# Advanced deep learning methods for multi-modality isointense infant brain image segmentation
+# 3D Unet Equipped with Advanced Deep Learning Methods
 Created by [Zhengyang Wang](http://www.eecs.wsu.edu/~zwang6/) at Washington State University.
+
+This project was presented as a poster (please find it in this repository) in BioImage Informatics Conference 2017.
 
 ## Introduction
 This repository includes a 3D version of Unet equipped with 2 advanced deep learning methods: VoxelDCL (derived from [PixelDCL](https://arxiv.org/abs/1705.06820)) and [Dense Transformer Networks](https://arxiv.org/abs/1705.08881).
+
+The preprocessing code and data input interface is for our dataset introduced below. To apply this model on other 3D segmentation datasets, you only need to change preprocessing code and data_reader.py.
 
 ## Citation
 If using this code, please cite our paper.
