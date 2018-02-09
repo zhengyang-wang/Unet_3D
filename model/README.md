@@ -1,5 +1,8 @@
 # 3D Unet with VoxelDCL and DTN
 
+## Note (Important!)
+I detected a mistake in using the batch normalization layer. During inference, the BN layer should take 'is_training=false' to use moving_mean and moving_variance. Based on current code, I suggest to change utils/ops.py manually by adding the argument 'is_training=false' to every 'tf.contrib.layers.batch_norm' when using '--option=predict'. Nothing needs to be changed for training. Please open an issue if you find that this way does not work. Thanks.
+
 ## Configure the network
 All network hyperparameters are configured in main.py.
 
