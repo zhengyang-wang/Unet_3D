@@ -1,7 +1,7 @@
 # 3D Unet with VoxelDCL and DTN
 
 ## Update
-For those who wants to use 3D Unet only, an updated implementation using new Tensorflow APIs is available [here](https://github.com/zhengyang-wang/3D-Unet--Tensorflow). Please check. Thank you!
+For those who wants to use 3D Unet only, an updated implementation using new Tensorflow APIs is available [here](https://github.com/zhengyang-wang/3D-Unet--Tensorflow). It is more flexible and easy to use. For example, it handles situations where the spatial sizes of inputs vary for different subjects. Please check. Thank you!
 
 ## Note (Important!)
 I detected a mistake in using the batch normalization layer. During inference, the BN layer should take 'is_training=false' to use moving_mean and moving_variance. Based on current code, I suggest to change utils/ops.py manually by adding the argument 'is_training=false' to every 'tf.contrib.layers.batch_norm' when using '--option=predict'. Nothing needs to be changed for training. Please open an issue if you find that this way does not work. Thanks.
