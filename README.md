@@ -1,5 +1,5 @@
 # 3D Unet Equipped with Advanced Deep Learning Methods
-Created by [Zhengyang Wang](http://www.linkedin.com/in/zhengyangwang1991) and [Shuiwang Ji](http://www.linkedin.com/in/shuiwang-ji-9a040715/) at Texas A&M University.
+Created by [Zhengyang Wang](http://people.tamu.edu/~zhengyang.wang/) and [Shuiwang Ji](http://people.tamu.edu/~sji/index.html) at Texas A&M University.
 
 This project was presented as a poster (please find it in this repository) in BioImage Informatics Conference 2017.
 
