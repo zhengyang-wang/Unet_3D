@@ -27,6 +27,14 @@ Ji},
   year={2017}
 }
 ```
+```
+@article{wang2018global,
+  title={Global Deep Learning Methods for Multimodality Isointense Infant Brain Image Segmentation},
+  author={Wang, Zhengyang and Zou, Na and Shen, Dinggang and Ji, Shuiwang},
+  journal={arXiv preprint arXiv:1812.04103},
+  year={2018}
+}
+```
 
 ## Dataset
 The dataset is from UNC and currently not available to the public. Basically, it is composed of multi-modality isointense infant brain MR images (3D) of 10 subjects. Each subject has two 3D images (T1WI and T2WI) with a manually 3D segmentation label.
